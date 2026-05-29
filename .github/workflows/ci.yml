@@ -2,24 +2,26 @@ name: "github action with docker"
 
 on:
   push:
-    branches: "main"
+    branches: 
+      - main
   pull_request:
-    branches: "main"
+    branches: 
+      - main
 
 
 jobs:
   dhruva:
-    runs-on: ubuntu_latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: "check out the ci pipeline"
         uses: actions/checkout@v4
 
       - name: "login the docker"
-        uses: docker/login-actions@v2
+        uses: docker/login-actions@v3
         with: 
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{secrets.DOCKER_PASSWORD}}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       
       - name: "create the image"
         run: "docker build -t dhruvamaheshwari47/github_actions_docker_etp:latest ."
